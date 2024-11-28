@@ -46,7 +46,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        role-to-assume: arn:aws:iam::864899850759:role/knab-lab-terraform
+        role-to-assume: arn:aws:iam::864899850759:role/knab-lab-tf-github-to-aws
         aws-region: eu-central-1
 
     ## # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
