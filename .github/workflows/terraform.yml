@@ -17,6 +17,8 @@ on:
 permissions:
   contents: read
   id-token: write
+env:
+  ACTIONS_STEP_DEBUG: true
 
 jobs:
   terraform:
