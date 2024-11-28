@@ -33,12 +33,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # - name: Terraform Init
-    #   run: aws sts get-caller-identity
-
     - name: Terraform Init
-      run: sudo apt-get update -y
-      continue-on-error: true
+      run: echo "hi"
+
+    # - name: Terraform Init
+      # run: sudo apt-get update -y
+      # continue-on-error: true
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
