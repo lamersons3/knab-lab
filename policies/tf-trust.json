@@ -1,18 +1,20 @@
 {
     "Version": "2012-10-17",
-    "Statement": [{
-    "Effect": "Allow",
-    "Principal": {
-        "Federated": "arn:aws:iam::864899850759:oidc-provider/token.actions.githubusercontent.com"
-    },
-    "Action": "sts:AssumeRoleWithWebIdentity",
-    "Condition": {
-        "StringEquals": {
-        "token.actions.githubusercontent.com:sub": "repo:knabnl-incubator/Mihails-Zotovs-Knab:ref:refs/heads/main",
-        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::864899850759:oidc-provider/token.actions.githubusercontent.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringLike": {
+                    "token.actions.githubusercontent.com:sub": "repo:lamersons3/knab-lab:*"
+                },
+                "StringEquals": {
+                    "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                }
+            }
         }
-    }
-    }]
+    ]
 }
-  
-  
