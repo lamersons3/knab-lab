@@ -37,7 +37,8 @@ jobs:
     #   run: aws sts get-caller-identity
 
     - name: Terraform Init
-      run: apt-get update -y
+      run: sudo apt-get update -y
+      continue-on-error: true
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
