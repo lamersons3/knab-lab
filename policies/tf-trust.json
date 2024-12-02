@@ -8,11 +8,14 @@
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
-                "StringLike": {
-                    "token.actions.githubusercontent.com:sub": "repo:lamersons3/knab-lab:*"
-                },
                 "StringEquals": {
                     "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                },
+                "StringLike": {
+                    "token.actions.githubusercontent.com:sub": [
+                        "repo:knabnl-incubator/Mihails-Zotovs-Knab:*",
+                        "repo:lamersons3/knab-lab:*"
+                    ]
                 }
             }
         }

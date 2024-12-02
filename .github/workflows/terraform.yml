@@ -5,7 +5,7 @@
 name: 'Terraform'
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
 permissions:
@@ -26,18 +26,23 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set Environment Variables
-      env:
-        GODADDY_API_KEY: ${{ secrets.GODADDY_API_KEY }}
-        GODADDY_API_SECRET: ${{ secrets.GODADDY_API_SECRET }}
-      run: |
-        echo "Environment variables set"
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
         role-to-assume: arn:aws:iam::864899850759:role/knab-lab-tf-github-to-aws
         aws-region: eu-central-1
+
+    - name: Set Godaddy Variables
+      run: |
+        export GODADDY_API_KEY=$(aws secretsmanager get-secret-value --secret-id godaddy_api_secret --query SecretString --output text | jq -r '.GODADDY_API_KEY')
+        export GODADDY_API_SECRET=$(aws secretsmanager get-secret-value --secret-id godaddy_api_secret --query SecretString --output text | jq -r '.GODADDY_API_SECRET')
+  
+    - name: echo godaddy vars
+      run: |
+        export GODADDY_API_KEY=$(aws secretsmanager get-secret-value --secret-id godaddy_api_secret --query SecretString --output text | jq -r '.GODADDY_API_KEY')
+        export GODADDY_API_SECRET=$(aws secretsmanager get-secret-value --secret-id godaddy_api_secret --query SecretString --output text | jq -r '.GODADDY_API_SECRET')
+
+  
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1

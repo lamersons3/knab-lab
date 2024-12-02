@@ -67,6 +67,6 @@ resource "aws_route" "knab_vpc_to_nat" {
 }
 resource "aws_route" "knab_vpc_to_tgw" {
   route_table_id         = aws_route_table.knab_lab_nat_rt.id
-  destination_cidr_block = "10.240.0.0/16"
+  destination_cidr_block = "172.31.0.0/24"
   transit_gateway_id     = data.aws_ec2_transit_gateway.knab-lab-transit-gateway.id
 }
