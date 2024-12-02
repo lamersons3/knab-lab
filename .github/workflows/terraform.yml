@@ -36,11 +36,14 @@ jobs:
       run: |
         export GODADDY_API_KEY=$(aws secretsmanager get-secret-value --secret-id godaddy_api_secret --query SecretString --output text | jq -r '.GODADDY_API_KEY')
         export GODADDY_API_SECRET=$(aws secretsmanager get-secret-value --secret-id godaddy_api_secret --query SecretString --output text | jq -r '.GODADDY_API_SECRET')
+        echo "GODADDY_API_KEY=$GODADDY_API_KEY" >> $GITHUB_ENV
+        echo "GODADDY_API_SECRET=$GODADDY_API_SECRET" >> $GITHUB_ENV
+
   
     - name: echo godaddy vars
       run: |
-        echo $GODADDY_API_KEY
-        echo $GODADDY_API_SECRET
+        echo "key: $GODADDY_API_KEY"
+        echo "secret: $GODADDY_API_SECRET"
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
